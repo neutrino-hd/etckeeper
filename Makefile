@@ -7,9 +7,10 @@ DESTDIR?=
 prefix=/usr
 bindir=${prefix}/bin
 etcdir=/etc
-sharedir=${prefix}/share
-mandir=${sharedir}/man
+mandir=${prefix}/share/man
 vardir=/var
+systemddir=/lib/systemd/system
+completiondir=${prefix}/share/bash-completion/completions
 CP=cp -R
 INSTALL=install 
 INSTALL_EXE=${INSTALL}
@@ -23,18 +24,27 @@ build: etckeeper.spec etckeeper.version
 install: etckeeper.version
 	mkdir -p $(DESTDIR)$(etcdir)/etckeeper/ $(DESTDIR)$(vardir)/cache/etckeeper/
 	$(CP) *.d $(DESTDIR)$(etcdir)/etckeeper/
+	$(INSTALL_EXE) daily $(DESTDIR)$(etcdir)/etckeeper/daily
 	$(INSTALL_DATA) $(CONFFILE) $(DESTDIR)$(etcdir)/etckeeper/etckeeper.conf
 	mkdir -p $(DESTDIR)$(bindir)
 	$(INSTALL_EXE) etckeeper $(DESTDIR)$(bindir)/etckeeper
 	mkdir -p $(DESTDIR)$(mandir)/man8
 	$(INSTALL_DATA) etckeeper.8 $(DESTDIR)$(mandir)/man8/etckeeper.8
-	mkdir -p $(DESTDIR)$(sharedir)/bash-completion/completions
-	$(INSTALL_DATA) bash_completion $(DESTDIR)$(sharedir)/bash-completion/completions/etckeeper
+	mkdir -p $(DESTDIR)$(completiondir)
+	$(INSTALL_DATA) bash_completion $(DESTDIR)$(completiondir)/etckeeper
+	mkdir -p $(DESTDIR)$(systemddir)
+	$(INSTALL_DATA) systemd/etckeeper.service $(DESTDIR)$(systemddir)/etckeeper.service
+	$(INSTALL_DATA) systemd/etckeeper.timer $(DESTDIR)$(systemddir)/etckeeper.timer
 ifeq ($(HIGHLEVEL_PACKAGE_MANAGER),apt)
 	mkdir -p $(DESTDIR)$(etcdir)/apt/apt.conf.d
 	$(INSTALL_DATA) apt.conf $(DESTDIR)$(etcdir)/apt/apt.conf.d/05etckeeper
 	mkdir -p $(DESTDIR)$(etcdir)/cruft/filters-unex
 	$(INSTALL_DATA) cruft_filter $(DESTDIR)$(etcdir)/cruft/filters-unex/etckeeper
+endif
+ifeq ($(LOWLEVEL_PACKAGE_MANAGER),pacman)
+	mkdir -p $(DESTDIR)$(prefix)/share/libalpm/hooks
+	$(INSTALL_DATA) ./pacman-pre-install.hook $(DESTDIR)$(prefix)/share/libalpm/hooks/05-etckeeper-pre-install.hook
+	$(INSTALL_DATA) ./pacman-post-install.hook $(DESTDIR)$(prefix)/share/libalpm/hooks/zz-etckeeper-post-install.hook
 endif
 ifeq ($(LOWLEVEL_PACKAGE_MANAGER),pacman-g2)
 	mkdir -p $(DESTDIR)$(etcdir)/pacman-g2/hooks

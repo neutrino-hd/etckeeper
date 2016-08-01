@@ -1,3 +1,46 @@
+etckeeper (1.18.5) unstable; urgency=medium
+
+  * Make etckeeper commit store metadata changes. The pre-commit
+    hook has always (and continues) to do that, but pre-commit is only
+    run when there are changes to tommit. This makes metadata-only
+    changes get committed.
+  * Move systemd files to /lib/systemd; /usr/lib/systemd is not used
+    on Debian.
+
+ -- Joey Hess <id@joeyh.name>  Sun, 17 Jul 2016 18:53:54 -0400
+
+etckeeper (1.18.4) unstable; urgency=medium
+
+  * Optimised find for special and hard linked files.
+    Thanks, Rike-Benjamin Schuppner.
+  * Adjust when Pacman 5 calls etckeeper hooks.
+    Thanks, Tilman Blumenbach and Christian Hesse.
+  * Only run Pacman hooks when files in /etc have changed.
+    Thanks, Christian Hesse.
+  * Added systemd timer that can run etckeeper 10 minutes after boot, and also
+    daily. It's not enabled by default, partly because of overlap with the
+    cron job.
+    Thanks, Christian Hesse.
+
+ -- Joey Hess <id@joeyh.name>  Mon, 20 Jun 2016 01:05:30 -0400
+
+etckeeper (1.18.3) unstable; urgency=medium
+
+  * Added support for pacmatic, contributed by nicolaichuk.
+  * bzr: make sure EMAIL is defined
+    Thanks, Serge E. Hallyn
+  * Fix Makefile version patterns to ignore non-native version number
+    (Antoine Beaupré)
+  * Support ~/.config/git/config when determining the author name and email.
+    Thanks, Richard Savio
+  * Added support for Arch's pacman package manager version 5.
+    Thanks, Tilman Blumenbach.
+  * Set HOME if it's not set, as is the case when using ubuntu's
+    update-manager.
+  * Move bash completion out of etc and into usr.
+
+ -- Joey Hess <id@joeyh.name>  Mon, 15 Feb 2016 13:11:20 -0400
+
 etckeeper (1.18.2-1) unstable; urgency=medium
 
   * Prepare upload to Debian unstable
