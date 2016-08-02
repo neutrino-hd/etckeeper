@@ -1,8 +1,14 @@
 etckeeper (1.18.5-1) unstable; urgency=medium
 
+  [Joey Hess]
   * New upstream release:
     * merged Makefile patch
     * update standards version, no change
+  * Remove pre-compiled .pyc for bzr plugin from Debian package,
+    and add python:Depends to Depends so that dh_python2 will install
+    maintainer script snippets. Unfortunately, this adds a completely
+    unnecessary dependency on python, which etckeeper does not need in
+    normal operation.
 
  -- Antoine Beaupré <anarcat@debian.org>  Mon, 01 Aug 2016 15:58:54 -0400
 
