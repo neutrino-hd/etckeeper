@@ -16,6 +16,8 @@ INSTALL=install
 INSTALL_EXE=${INSTALL}
 INSTALL_DATA=${INSTALL} -m 0644
 PYTHON=python
+FAKEROOT := $(shell command -v fakeroot 2> /dev/null)
+TESTDIR := $(shell mktemp -u -d)
 
 build: etckeeper.spec etckeeper.version
 	-$(PYTHON) ./etckeeper-bzr/__init__.py build || echo "** bzr support not built"
@@ -68,6 +70,15 @@ endif
 
 clean: etckeeper.spec etckeeper.version
 	rm -rf build
+
+test:
+	mkdir $(TESTDIR)
+ifdef FAKEROOT
+	testdir=$(TESTDIR) fakeroot ./test-etckeeper
+else
+	testdir=$(TESTDIR) ./test-etckeeper
+endif
+	rm -rf $(TESTDIR)
 
 etckeeper.spec:
 	sed -i~ "s/Version:.*/Version: $$(perl -e '$$_=<>;m/\((.*?)(-.*)?\)/;print $$1;'<debian/changelog)/" etckeeper.spec
