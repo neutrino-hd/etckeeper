@@ -10,7 +10,6 @@ Homepage: https://etckeeper.branchable.com/
 
 Package: etckeeper
 Architecture: all
-Section: admin
 Depends: git (>= 1:1.7) | mercurial | bzr (>= 1.5~) | darcs, ${misc:Depends}, ${python3:Depends}
 Recommends: cron-daemon
 Suggests: sudo (>= 1.7.4p4)
