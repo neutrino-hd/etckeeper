@@ -81,14 +81,18 @@ writefile () {
 
         ignore "/*"
         ignore "!.gitignore"
-        ignore "!neutrino/"
-        ignore "!network/"
+        ignore "!neutrino"
+        ignore "!network"
         ignore "!auto.*"
         ignore "!.etckeeper"
         ignore "!minidlna.conf"
         ignore "!resolv.conf"
-	ignore "!zsh/"
-	ignore "!/systemd/system/multi-user.target.wants/"
+	ignore "!zsh"
+	ignore "!systemd"
+	ignore "/systemd/*"
+	ignore "!systemd/system/"
+	ignore "/systemd/system/*"
+	ignore "!/systemd/system/multi-user.target.wants"
 
 	nl
 	comment "end section $managed_by_etckeeper"
