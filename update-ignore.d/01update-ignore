@@ -80,7 +80,6 @@ writefile () {
 	nl
 
         ignore "/*"
-        ignore "!.gitignore"
         ignore "!neutrino"
         ignore "!network"
         ignore "!auto.*"
