@@ -99,6 +99,9 @@ writefile () {
 	ignore "!webmin"
 	ignore "/webmin/*"
 	ignore "!webmin/config"
+        ignore "!samba"
+        ignore "/samba/*"
+        ignore "!samba/smb.conf"
 
 	nl
 	comment "end section $managed_by_etckeeper"
