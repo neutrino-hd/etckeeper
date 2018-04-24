@@ -80,6 +80,7 @@ writefile () {
 	nl
 
         ignore "/*"
+	ignore "!exports"
         ignore "!neutrino"
         ignore "!network"
         ignore "!auto.*"
