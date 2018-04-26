@@ -95,8 +95,6 @@ writefile () {
 	ignore "!/systemd/system/multi-user.target.wants"
 	ignore "!proftpd.conf"
 	ignore "!ssh"
-	ignore "/ssh/*"
-	ignore "!ssh/sshd_config"
 	ignore "!webmin"
 	ignore "/webmin/*"
 	ignore "!webmin/config"
