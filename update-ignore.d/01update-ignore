@@ -98,6 +98,7 @@ writefile () {
 	ignore "!webmin"
 	ignore "/webmin/*"
 	ignore "!webmin/config"
+	ignore "!webmin/authentic-theme"
         ignore "!samba"
         ignore "/samba/*"
         ignore "!samba/smb.conf"
