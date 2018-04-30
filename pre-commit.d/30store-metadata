@@ -114,12 +114,12 @@ maybe_chmod_chown() {
 			s/^/$q/;
 			s/$/$q/;
 			if ($uid != $>) {
-				printf "maybe chown $q%s$q %s\n", uidname($uid), $_;
+				printf "chown $q%s$q %s\n", uidname($uid), $_;
 			}
 			if ($gid != $)) {
-				printf "maybe chgrp $q%s$q %s\n", gidname($gid), $_;
+				printf "chgrp $q%s$q %s\n", gidname($gid), $_;
 			}
-			printf "maybe chmod %04o %s\n", $mode & 07777, $_;
+			printf "chmod %04o %s\n", $mode & 07777, $_;
 		'
 		return $?
 	else
