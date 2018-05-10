@@ -103,6 +103,7 @@ writefile () {
         ignore "/samba/*"
         ignore "!samba/smb.conf"
 	ignore "/webmin/samba"
+	ignore "!hostname"
 
 	nl
 	comment "end section $managed_by_etckeeper"
