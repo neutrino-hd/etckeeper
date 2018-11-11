@@ -35,7 +35,7 @@ comment() {
 
 ignore() {
 	glob="$1"
-	
+
 	case "$VCS" in
 		git)
 			# escape "#" in ignores, as otherwise it may
@@ -104,6 +104,7 @@ writefile () {
         ignore "!samba/smb.conf"
 	ignore "/webmin/samba"
 	ignore "!hostname"
+	ignore "!lcd4linux.conf"
 
 	nl
 	comment "end section $managed_by_etckeeper"
