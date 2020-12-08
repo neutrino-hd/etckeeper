@@ -101,6 +101,7 @@ writefile () {
 	ignore "!hostname"
 	ignore "!keys"
 	ignore "!rccode"
+	ignore "!advmame.rc"
 
 	nl
 	comment "end section $managed_by_etckeeper"
